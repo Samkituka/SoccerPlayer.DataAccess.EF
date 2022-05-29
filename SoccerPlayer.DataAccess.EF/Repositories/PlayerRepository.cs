@@ -17,18 +17,18 @@ namespace SoccerPlayer.DataAccess.EF.Repositories
             _dbContext = dbContext;
         }
 
-        public int Create(PlayerModel player)
+        public int Create(Player player)
         {
 
             _dbContext.Add(player);
             _dbContext.SaveChanges();
 
-            return player.PlayerID ;
+            return player.PlayerId ;
         }
 
-        public int Update(PlayerModel player )
+        public int Update(Player player )
         {
-            PlayerModel  existingplayer = _dbContext.PlayerModel.Find(player.PlayerID );
+            Player existingplayer = _dbContext.Players.Find(player.PlayerId );
 
             existingplayer.FirstName = player.FirstName;
             existingplayer.LastName = player.LastName;
@@ -40,28 +40,28 @@ namespace SoccerPlayer.DataAccess.EF.Repositories
 
             _dbContext.SaveChanges();
 
-            return existingplayer.PlayerID;
+            return existingplayer.PlayerId;
         }
 
-        public bool Delete(int PlayerID)
+        public bool Delete(int PlayerId)
         {
-            PlayerModel player = _dbContext.PlayerModel.Find(PlayerID);
+            Player player = _dbContext.Players.Find(PlayerId);
             _dbContext.Remove(player);
             _dbContext.SaveChanges();
 
             return true;
         }
 
-        public List<PlayerModel> GetAllPlayer()
+        public List<Player> GetAllPlayer()
         {
-            List<PlayerModel> PlayerList = _dbContext.PlayerModel.ToList();
+            List<Player> PlayerList = _dbContext.Players.ToList();
 
             return PlayerList;
         }
 
-        public PlayerModel GetPlayerByID(int PlayerID)
+        public Player GetPlayerByID(int PlayerId)
         {
-            PlayerModel player = _dbContext.PlayerModel.Find(PlayerID);
+            Player player = _dbContext.Players.Find(PlayerId);
 
             return player;
         }

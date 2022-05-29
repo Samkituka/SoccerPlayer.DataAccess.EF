@@ -12,9 +12,9 @@ namespace SoccerPlayerMVCApplication.Models
     {
         private PlayerRepository _repo;
 
-        public List<PlayerModel > PlayerList { get; set; }
+        public List<Player> PlayerList { get; set; }
 
-        public PlayerModel  CurrentPlayer { get; set; }
+        public Player CurrentPlayer { get; set; }
 
         public bool IsActionSuccess { get; set; }
 
@@ -27,51 +27,53 @@ namespace SoccerPlayerMVCApplication.Models
             CurrentPlayer = PlayerList.FirstOrDefault();
         }
 
-        public PlayerViewModel(SoccerPlayerContext context, int PlayerID)
+        public PlayerViewModel(SoccerPlayerContext context, int playerId)
         {
             _repo = new PlayerRepository(context);
+
+
             PlayerList = GetAllPlayer();
 
-            if (PlayerID > 0)
+            if (playerId > 0)
             {
-                CurrentPlayer = GetPlayer(PlayerID );
+                CurrentPlayer = GetPlayer(playerId );
             }
             else
             {
-                CurrentPlayer= new PlayerModel ();
+                CurrentPlayer= new Player();
             }
         }
 
-        public void SavePlayer(PlayerModel  player)
+        public void SavePlayer(Player player)
         {
-            if (player.PlayerID  > 0)
+            if (player.PlayerId  > 0)
             {
                 _repo.Update(player );
             }
             else
             {
-                player.PlayerID  = _repo.Create(player );
+                player.PlayerId  = _repo.Create(player );
             }
 
             PlayerList  = GetAllPlayer();
-            CurrentPlayer  = GetPlayer(player.PlayerID);
+            CurrentPlayer  = GetPlayer(player.PlayerId);
         }
 
-        public void RemovePlayer(int PlayerID)
+        public void RemovePlayer(int PlayerId)
         {
-            _repo.Delete(PlayerID );
+            _repo.Delete(PlayerId );
             PlayerList  = GetAllPlayer();
             CurrentPlayer  = PlayerList.FirstOrDefault();
         }
 
-        public List<PlayerModel> GetAllPlayer()
+        public List<Player> GetAllPlayer()
         {
-            return _repo.GetAllPlayer ();
+            return _repo.GetAllPlayer();
         }
 
-        public PlayerModel  GetPlayer(int PlayerID)
+        public Player GetPlayer(int PlayerId)
         {
-            return _repo.GetPlayerByID(PlayerID );
+            return _repo.GetPlayerByID(PlayerId );
         }
     }
 }

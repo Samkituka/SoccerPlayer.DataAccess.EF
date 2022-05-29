@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace SoccerPlayer.DataAccess.EF.Models
 {
-    public partial class PlayerModel
+    public partial class Player
     {
-        public int PlayerID { get; set; }
+        public int PlayerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
@@ -13,22 +15,19 @@ namespace SoccerPlayer.DataAccess.EF.Models
         public string Position { get; set; }
 
 
-
-        public PlayerModel(int playerid, string firstname, string lastname, int age, string team, string position)
+        public Player (int playerId, string firstName, string lastName, int age, string team, string position)
         {
-            PlayerID = playerid;
-            FirstName = firstname;
-            LastName = lastname;
+            PlayerId = playerId;
+            FirstName = firstName;
+            LastName = lastName;
             Age = age;
-            Team = team;
+            Team =team;
             Position = position;
         }
 
-        public PlayerModel ()
+        public Player()
         {
 
         }
     }
-
-    
 }

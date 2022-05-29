@@ -32,6 +32,9 @@ namespace SoccerPlayerMVCApplication
             services.AddScoped<IServiceCollection , ServiceCollection  >();
             services.AddControllersWithViews();
 
+            string connectionString = this.Configuration.GetConnectionString("SoccerPlayer");
+            services.AddDbContext<SoccerPlayerContext>(options => options.UseSqlServer(connectionString));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,7 +2,7 @@
 @using SoccerPlayer.DataAccess.EF.Models
 
 @{
-    string pageType = Model.CurrentPlayer.PlayerID > 0 ? "Update Player" : "Create Player";
+    string pageType = Model.CurrentPlayer.PlayerId > 0 ? "Update Player" : "Create Player";
 
     ViewData["Title"] = $"SoccerPlayer Information | {pageType}";
 }
@@ -49,6 +49,6 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="PlayerID" value="@Model.CurrentPlayer.PlayerID" />
+    <input type="hidden" name="PlayerId" value="@Model.CurrentPlayer.PlayerId" />
 </form>
 

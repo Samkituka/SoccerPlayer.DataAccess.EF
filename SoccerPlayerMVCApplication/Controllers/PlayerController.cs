@@ -21,10 +21,9 @@ namespace SoccerPlayerMVCApplication.Controllers
             _context = context;
         }
 
-       
-
         public IActionResult Index()
         {
+
             PlayerViewModel model = new PlayerViewModel(_context);
             return View(model);
         }
@@ -34,9 +33,9 @@ namespace SoccerPlayerMVCApplication.Controllers
         {
             PlayerViewModel model = new PlayerViewModel(_context);
 
-            PlayerModel  player  = new(PlayerID , FirstName , LastName , age , Team , Position );
+            Player player = new(PlayerID, FirstName, LastName, age, Team, Position);
 
-            model.SavePlayer(player );
+            model.SavePlayer(player);
             model.IsActionSuccess = true;
             model.ActionMessage = "Player has been saved successfully";
 
@@ -46,21 +45,22 @@ namespace SoccerPlayerMVCApplication.Controllers
         public IActionResult Update(int id)
         {
             PlayerViewModel model = new PlayerViewModel(_context, id);
+
             return View(model);
         }
 
         public IActionResult Delete(int id)
         {
             PlayerViewModel model = new PlayerViewModel(_context);
-
+          
             if (id > 0)
             {
                 model.RemovePlayer(id);
             }
 
             model.IsActionSuccess = true;
-            model.ActionMessage = "Player has been deleted successfully";
-            return View("Index", model);
+            model.ActionMessage = "player has been deleted successfully";
+            return View("index", model);
         }
 
     }
