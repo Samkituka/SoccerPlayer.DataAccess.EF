@@ -34,8 +34,6 @@
         <div class="form-row">
             <div class="col-md-3 offset-md-3 form-group">
                 <label>Team: </label>
-                @*<input type="text"  class="form-control" name="Team" value="@Model.CurrentPlayer.Team  " />*@
-
                 @Html.DropDownListFor(m => m.TeamId, new SelectList(Model.TeamOptions, "Value", "Text", "Selected"))
             </div>
         

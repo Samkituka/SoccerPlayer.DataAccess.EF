@@ -1,0 +1,5 @@
+Added a new table "Teams" linked to the "Players" table with a foreign Key.
+Added a drop down list button for the choice of the team in "Players".
+Cropped and Modified the " Age " field in " Players" to only allow input of numbers from 20 to 100.
+Modified the team Stadium Capacity field in " Teams " to only allow input of positive numbers.
+
