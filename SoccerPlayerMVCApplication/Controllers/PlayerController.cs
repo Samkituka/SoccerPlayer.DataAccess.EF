@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SoccerPlayerMVCApplication.Models;
 using SoccerPlayer.DataAccess.EF.Context;
 using SoccerPlayer.DataAccess.EF.Repositories;
-using SoccerPlayer.DataAccess.EF.Models;
 using SoccerPlayer.DataAccess.EF;
+using SoccerPlayerMVCApplication.Models;
+using SoccerPlayer.DataAccess.EF.Models;
 
 namespace SoccerPlayerMVCApplication.Controllers
 {
@@ -29,11 +29,20 @@ namespace SoccerPlayerMVCApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(int PlayerID, string FirstName, string LastName, int age, string Team, string Position)
+        public IActionResult Index(int PlayerID, string FirstName, string LastName, int age, int TeamId, string Position)
         {
             PlayerViewModel model = new PlayerViewModel(_context);
 
-            Player player = new(PlayerID, FirstName, LastName, age, Team, Position);
+            Player player = new()
+            {
+                PlayerId = PlayerID,
+                FirstName = FirstName,
+                LastName = LastName,
+                Age = age,
+                //Team = Team,
+                TeamId = TeamId,
+                Position = Position
+            };
 
             model.SavePlayer(player);
             model.IsActionSuccess = true;

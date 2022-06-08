@@ -19,35 +19,42 @@
                 <label>First Name: </label>
                 <input type="text" class="form-control" name="firstName" value="@Model.CurrentPlayer.FirstName" />
             </div>
+            
             <div class="col-md-3 form-group">
                 <label>Last Name: </label>
                 <input type="text" class="form-control" name="lastName" value="@Model.CurrentPlayer.LastName" />
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-3 offset-md-3 form-group">
+            <div class="col-sm-1 offset-md-3 form-group">
                 <label>Age: </label>
-                <input type="text"  class="form-control" name="Age" value="@Model.CurrentPlayer.Age" />
+                <input type="number" min ="20" max= "100"  class="form-control" name="Age" value="@Model.CurrentPlayer.Age" />
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-3 offset-md-3 form-group">
                 <label>Team: </label>
-                <input type="text"  class="form-control" name="Team" value="@Model.CurrentPlayer.Team  " />
+                @*<input type="text"  class="form-control" name="Team" value="@Model.CurrentPlayer.Team  " />*@
+
+                @Html.DropDownListFor(m => m.TeamId, new SelectList(Model.TeamOptions, "Value", "Text", "Selected"))
             </div>
+        
             <div class="form-row">
-                <div class="col-md-3 offset-md-3 form-group">
+                <div class="col-md-12 offset-md-2 form-group">
                     <label>Position: </label>
-                    <input type="text"  class="form-control" name="Position" value="@Model.CurrentPlayer.Position    " />
+                    <input type="text" class="form-control" name="Position" value="@Model.CurrentPlayer.Position" />
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col-md-6 offset-md-3">
-                    <button type="button" class="btn btn-secondary" onclick="location.href = '/Player/Index'">CANCEL</button>
-                    <button type="submit" class="btn btn-primary">SAVE </button>
-                </div>
-            </div>
+
         </div>
+
+        <div class="form-row">
+            <div class="col-md-6 offset-md-3">
+                <button type="button" class="btn btn-secondary" onclick="location.href = '/Player/Index'">CANCEL</button>    
+                <button type="submit" class="btn btn-primary">SAVE </button>    
+             </div>
+        </div>
+            
     </div>
     <input type="hidden" name="PlayerId" value="@Model.CurrentPlayer.PlayerId" />
 </form>

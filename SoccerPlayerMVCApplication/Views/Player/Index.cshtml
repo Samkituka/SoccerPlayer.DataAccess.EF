@@ -51,20 +51,22 @@
                     <th>Age</th>
                     <th>Team</th>
                     <th>Position</th>
+                    <th>TeamId</th>
                     <th colspan="2"><button type="button" onclick="javascript:openLocation('/Player/Update/0')" class="btn btn-success btn-sm">ADD NEW PLAYER</button></th>
                 </tr>
 
                 @foreach (Player player in Model.PlayerList)
                 {
-                    <tr>
-                        <td>@player.FirstName</td>
-                        <td>@player.LastName</td>
-                        <td>@player.Age</td>
-                        <td>@player.Team</td>
-                        <td>@player.Position</td>
-                        <td><button type="button" onclick="javascript:openLocation('/Player/Update/@player.PlayerId')" class="btn btn-secondary btn-sm">EDIT</button></td>
-                        <td><button type="button" onclick="javascript:confirmDelete(@player.PlayerId)" class="btn btn-danger btn-sm">DELETE</button></td>
-                    </tr>
+            <tr>
+                <td>@player.FirstName</td>
+                <td>@player.LastName</td>
+                <td>@player.Age</td>
+                <td>@player.Team</td>
+                <td>@player.Position</td>
+                <td>@player.TeamId</td>
+                <td><button type="button" onclick="javascript:openLocation('/Player/Update/@player.PlayerId')" class="btn btn-secondary btn-sm">EDIT</button></td>
+                <td><button type="button" onclick="javascript:confirmDelete(@player.PlayerId)" class="btn btn-danger btn-sm">DELETE</button></td>
+            </tr>
                 }
             </table>
         </div>

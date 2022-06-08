@@ -1,0 +1,90 @@
+﻿@using SoccerTeamMVCApplication.Models;
+@model TeamViewModel  
+@using SoccerPlayer.DataAccess.EF.Models;
+
+@{
+    ViewData["Title"] = "SoccerTeamMVCApplication | Team";
+}
+
+<script type="text/javascript">
+    function openLocation(url) {
+        window.location.href = url;
+    }
+
+    function confirmDelete(id) {
+        $("#hdnDeleteTeamId").val(id);
+        openModal("deleteModal");
+    }
+
+    function cancelDelete() {
+        $("#hdnDeleteTeamId").val(0);
+        closeModal("deleteModal");
+    }
+
+    function deleteTeam() {
+        var id = $("#hdnDeleteTeamId").val();
+        window.location.href = "/Team/Delete/" + id;
+    }
+</script>
+
+<input type="hidden" id="hdnDeleteTeamId" value="0" />
+
+<div class="text-center">
+    @if (!String.IsNullOrEmpty(Model.ActionMessage))
+    {
+        string colorClass = Model.IsActionSuccess ? "alert-success" : "alert-danger";
+
+        <div class="alert @colorClass alert-dismissible fade show" role="alert">
+            <strong>@Model.ActionMessage</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <h1 class="display-4">Teams</h1>
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <table class="table">
+                <tr>
+                    <th>Team Name</th>
+                    <th>Team Coach</th>
+                    <th>Team BestPlayer</th>
+                    <th>Team Captain</th>
+                    <th>Team StadiumName</th>
+                    <th>Team StadiumCapacity</th>
+                    <th colspan="2"><button type="button" onclick="javascript:openLocation('/Team/Update/0')" class="btn btn-success btn-sm">ADD NEW Team</button></th>
+                </tr>
+
+                @foreach (Team Team in Model.TeamList)
+                {
+            <tr>
+                <td>@Team.TeamName  </td>
+                <td>@Team.TeamCoach   </td>
+                <td>@Team.TeamBestPlayer  </td>
+                <td>@Team.TeamCaptain  </td>
+                <td>@Team.TeamStadiumName  </td>
+                <td>@Team.TeamStadiumCapacity  </td>
+                <td><button type="button" onclick="javascript:openLocation('/Team/Update/@Team.TeamId')" class="btn btn-secondary btn-sm">EDIT</button></td>
+                <td><button type="button" onclick="javascript:confirmDelete(@Team.TeamId)" class="btn btn-danger btn-sm">DELETE</button></td>
+            </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">CONFIRM DELETE</h5>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this Team?</p>
+                <button type="button" onclick="javascript:cancelDelete()" class="btn btn-secondary btn-sm">CANCEL</button>
+                <button type="button" onclick="javascript:deleteTeam()" class="btn btn-danger btn-sm">DELETE</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@using SoccerTeamMVCApplication.Models;
+@model TeamViewModel
+@using SoccerPlayer.DataAccess.EF.Models;
+
+@{
+    string pageType = Model.CurrentTeam.TeamId > 0 ? "Update Team" : "Create Team";
+
+    ViewData["Title"] = $"SoccerTeam Information | {pageType}";
+}
+
+<form action="~/Team/Index" method="post">
+    <div>
+        <div class="row">
+            <div class="col-6 offset-3 text-center">
+                <h1 class="display-4" style="margin: 20px 0px;">@pageType</h1>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-3 offset-md-3 form-group">
+                <label>Team Name: </label>
+                <input type="text" class="form-control" name="TeamName" value="@Model.CurrentTeam.TeamName  " />
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Team Coach: </label>
+                <input type="text" class="form-control" name="TeamCoach" value="@Model.CurrentTeam.TeamCoach  " />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-3 offset-md-3 form-group">
+                <label>TeamBestPlayer: </label>
+                <input type="text" class="form-control" name="TeamBestPlayer" value="@Model.CurrentTeam.TeamBestPlayer  " />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-3 offset-md-3 form-group">
+                <label>Team Captain: </label>
+                <input type="text" class="form-control" name="TeamCaptain" value="@Model.CurrentTeam.TeamCaptain    " />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-3 offset-md-3 form-group">
+                <label>Team Stadium Name : </label>
+                <input type="text" class="form-control" name="TeamStadiumName" value="@Model.CurrentTeam.TeamStadiumName      " />
+            </div>
+            <div class="form-row">
+                <div class="col-md-9 offset-md-6 form-group">
+                    <label>Team Stadium Capacity : </label>
+                    <input type="number" min="0" class="form-control" name="TeamStadiumCapacity" value="@Model.CurrentTeam.TeamStadiumCapacity        " />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 offset-md-3">
+                <button type="button" class="btn btn-secondary" onclick="location.href = '/Team/Index'">CANCEL</button>
+                <button type="submit" class="btn btn-primary">SAVE </button>
+            </div>
+        </div>
+        
+    </div>
+    <input type="hidden" name="TeamId" value="@Model.CurrentTeam.TeamId" />
+</form>
+
