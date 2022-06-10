@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SoccerPlayer.DataAccess.EF.Context;
 using SoccerPlayer.DataAccess.EF.Models;
 
@@ -37,7 +38,6 @@ namespace SoccerPlayer.DataAccess.EF.Repositories
             existingplayer.Position = player.Position;
 
 
-
             _dbContext.SaveChanges();
 
             return existingplayer.PlayerId;
@@ -54,8 +54,12 @@ namespace SoccerPlayer.DataAccess.EF.Repositories
 
         public List<Player> GetAllPlayer()
         {
-            List<Player> PlayerList = _dbContext.Players.ToList();
+           
 
+            var sql = "Select P.PlayerID, P.FirstName,P.Position,   P.LastName, P.Age,P.TeamId ,T.TeamName AS Team  From Players P Inner Join Teams T On P.TeamId = T.TeamId";
+
+            List<Player> PlayerList = _dbContext.Players.FromSqlRaw(sql).ToList<Player>()  ;
+                
             return PlayerList;
         }
 

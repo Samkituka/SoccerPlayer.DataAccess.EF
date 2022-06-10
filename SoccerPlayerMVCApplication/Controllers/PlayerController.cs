@@ -45,6 +45,9 @@ namespace SoccerPlayerMVCApplication.Controllers
             };
 
             model.SavePlayer(player);
+            model = new PlayerViewModel(_context);
+
+
             model.IsActionSuccess = true;
             model.ActionMessage = "Player has been saved successfully";
 
